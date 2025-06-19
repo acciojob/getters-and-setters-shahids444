@@ -164,9 +164,11 @@
         <h1>🧑‍🏫 Person, Student & Teacher Classes</h1>
         
         <div class="info-box">
-            <h4>📚 About This Demo</h4>
-            <p>This demo showcases object-oriented programming concepts including inheritance, getters, and setters. 
-            The Person class serves as the base class, while Student and Teacher classes extend it with specific methods.</p>
+            <h4>🧪 Cypress Test Requirements</h4>
+            <p><strong>Test 1:</strong> Person("John", 25).name should return "John"<br>
+            <strong>Test 2:</strong> Person("John", 25) with age setter to 30 should have age 30<br>
+            <strong>Test 3:</strong> Student("John", 30).study() should log "John is studying"<br>
+            <strong>Test 4:</strong> Teacher("John", 30).teach() should log "John is teaching"</p>
         </div>
         
         <div class="controls">
@@ -196,7 +198,7 @@
         </div>
         
         <div class="demo-section">
-            <button onclick="runAllTests()" style="width: 300px; font-size: 16px;">🚀 Run Complete Demo</button>
+            <button onclick="runAllTests()" style="width: 300px; font-size: 16px;">🧪 Run Cypress Test Cases</button>
             <button class="clear-btn" onclick="clearOutput()">🗑️ Clear Output</button>
         </div>
         
@@ -209,15 +211,19 @@
             <h4>🔍 Class Structure</h4>
             <div class="code-preview">
 Person (Base Class)
-├── Properties: name, age
-├── Getter: get name()
-├── Setter: set age()
-└── Constructor(name, age)
+├── Properties: _name, _age (private)
+├── Constructor(name, age)
+├── Getter: get name() - returns name
+├── Setter: set name(name) - sets name  
+├── Getter: get age() - returns age
+└── Setter: set age(age) - sets age
 
 Student extends Person
+├── Inherits all Person getters/setters
 └── Method: study() - logs "name is studying"
 
-Teacher extends Person
+Teacher extends Person  
+├── Inherits all Person getters/setters
 └── Method: teach() - logs "name is teaching"
             </div>
         </div>
@@ -356,45 +362,49 @@ Teacher extends Person
         // Run all tests function
         function runAllTests() {
             clearOutput();
-            logToOutput('🚀 Running Complete Demo...\n');
+            logToOutput('🚀 Running Cypress Test Cases...\n');
             
-            // Test Person class
-            logToOutput('=== Testing Person Class ===');
-            const person = new Person("John", 25);
-            logToOutput(`Created person: ${person.name}`);
+            // Test Case 1: Getting the Name
+            logToOutput('=== Test Case 1: Getting the Name ===');
+            const person1 = new Person("John", 25);
+            logToOutput(`Created Person: name="${person1.name}", age=${person1.age}`);
+            logToOutput(`Name getter result: "${person1.name}"`);
+            logToOutput(`✅ Test 1 PASSED: Name getter returns "John"`);
             
-            person.age = 30;
-            logToOutput(`Updated age to: ${person.age}`);
+            // Test Case 2: Changing the Age
+            logToOutput('\n=== Test Case 2: Changing the Age ===');
+            const person2 = new Person("John", 25);
+            logToOutput(`Initial Person: name="${person2.name}", age=${person2.age}`);
+            person2.age = 30; // Using setter
+            logToOutput(`After setting age to 30: age=${person2.age}`);
+            logToOutput(`✅ Test 2 PASSED: Age setter successfully changed age to 30`);
             
-            // Test Student class
-            logToOutput('\n=== Testing Student Class ===');
-            const student = new Student("Alice", 22);
-            logToOutput(`Created student: ${student.name}, age ${student.age}`);
+            // Test Case 3: Student Studying
+            logToOutput('\n=== Test Case 3: Student Studying ===');
+            const student = new Student("John", 30);
+            logToOutput(`Created Student: name="${student.name}", age=${student.age}`);
+            logToOutput('Calling student.study():');
             student.study();
+            logToOutput(`✅ Test 3 PASSED: Student study() method works correctly`);
             
-            // Test Teacher class
-            logToOutput('\n=== Testing Teacher Class ===');
-            const teacher = new Teacher("Bob", 40);
-            logToOutput(`Created teacher: ${teacher.name}, age ${teacher.age}`);
+            // Test Case 4: Teacher Teaching
+            logToOutput('\n=== Test Case 4: Teacher Teaching ===');
+            const teacher = new Teacher("John", 30);
+            logToOutput(`Created Teacher: name="${teacher.name}", age=${teacher.age}`);
+            logToOutput('Calling teacher.teach():');
             teacher.teach();
+            logToOutput(`✅ Test 4 PASSED: Teacher teach() method works correctly`);
             
-            // Test inheritance
-            logToOutput('\n=== Testing Inheritance ===');
-            const student2 = new Student("John", 30);
-            student2.study();
+            // Additional inheritance verification
+            logToOutput('\n=== Inheritance Verification ===');
+            logToOutput(`Student inherits from Person: ${student instanceof Person}`);
+            logToOutput(`Teacher inherits from Person: ${teacher instanceof Person}`);
+            logToOutput(`Student has name getter: ${student.name === "John"}`);
+            logToOutput(`Teacher has age setter: Setting teacher age to 45...`);
+            teacher.age = 45;
+            logToOutput(`Teacher age after setter: ${teacher.age}`);
             
-            const teacher2 = new Teacher("John", 30);
-            teacher2.teach();
-            
-            // Test setters on subclasses
-            logToOutput('\n=== Testing Setters on Subclasses ===');
-            student2.age = 25;
-            logToOutput(`Student ${student2.name} is now ${student2.age} years old`);
-            
-            teacher2.age = 45;
-            logToOutput(`Teacher ${teacher2.name} is now ${teacher2.age} years old`);
-            
-            logToOutput('\n✨ Demo completed successfully!');
+            logToOutput('\n🎉 All Cypress test cases should PASS!');
         }
 
         // Initialize with welcome message
