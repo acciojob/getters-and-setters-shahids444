@@ -214,16 +214,15 @@ Person (Base Class)
 ├── Properties: _name, _age (private)
 ├── Constructor(name, age)
 ├── Getter: get name() - returns name
-├── Setter: set name(name) - sets name  
-├── Getter: get age() - returns age
+├── Getter: get age() - returns age (for access)
 └── Setter: set age(age) - sets age
 
 Student extends Person
-├── Inherits all Person getters/setters
+├── Inherits all Person properties and methods
 └── Method: study() - logs "name is studying"
 
 Teacher extends Person  
-├── Inherits all Person getters/setters
+├── Inherits all Person properties and methods
 └── Method: teach() - logs "name is teaching"
             </div>
         </div>
@@ -237,22 +236,17 @@ Teacher extends Person
                 this._age = age;
             }
 
-            // Getter for name
+            // Getter for name (as specified in requirements)
             get name() {
                 return this._name;
             }
 
-            // Setter for name
-            set name(name) {
-                this._name = name;
-            }
-
-            // Getter for age
+            // Getter for age (needed to access age)
             get age() {
                 return this._age;
             }
 
-            // Setter for age
+            // Setter for age (as specified in requirements)
             set age(age) {
                 this._age = age;
             }
