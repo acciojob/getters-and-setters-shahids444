@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Person Classes - Complete Implementation</title>
     <style>
         body {
@@ -13,20 +13,20 @@
             background: #f5f7fa;
             line-height: 1.6;
         }
-        
+
         .container {
             background: white;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
+
         h1 {
             color: #2c3e50;
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         .code-section {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -35,21 +35,15 @@
             margin: 20px 0;
             overflow-x: auto;
         }
-        
-        .code-section h3 {
-            color: #495057;
-            margin-top: 0;
-        }
-        
+
         pre {
             background: #2d3748;
             color: #e2e8f0;
             padding: 15px;
             border-radius: 5px;
-            overflow-x: auto;
             font-size: 14px;
         }
-        
+
         .test-button {
             background: #007bff;
             color: white;
@@ -60,11 +54,11 @@
             font-size: 16px;
             margin: 10px 5px;
         }
-        
+
         .test-button:hover {
             background: #0056b3;
         }
-        
+
         .output {
             background: #1a202c;
             color: #48bb78;
@@ -75,7 +69,7 @@
             white-space: pre-wrap;
             margin-top: 20px;
         }
-        
+
         .requirements {
             background: #e3f2fd;
             border-left: 4px solid #2196f3;
@@ -87,70 +81,19 @@
 <body>
     <div class="container">
         <h1>🧑‍🏫 Person, Student & Teacher Classes</h1>
-        
+
         <div class="requirements">
             <h3>📋 Requirements Summary</h3>
             <ul>
                 <li><strong>Person Class:</strong> Constructor(name, age), getter for name, setter for age</li>
                 <li><strong>Student Class:</strong> Extends Person, has study() method</li>
                 <li><strong>Teacher Class:</strong> Extends Person, has teach() method</li>
-                <li><strong>Notes:</strong> Person class should include both getter and setter for name and age</li>
             </ul>
         </div>
 
         <div class="code-section">
             <h3>📝 Complete Implementation</h3>
-            <pre><code>// Person Class - Base class with name and age attributes
-class Person {
-    constructor(name, age) {
-        this._name = name;
-        this._age = age;
-    }
-
-    // Getter for name
-    get name() {
-        return this._name;
-    }
-
-    // Setter for name
-    set name(name) {
-        this._name = name;
-    }
-
-    // Getter for age
-    get age() {
-        return this._age;
-    }
-
-    // Setter for age
-    set age(age) {
-        this._age = age;
-    }
-}
-
-// Student Class - Inherits from Person and adds study method
-class Student extends Person {
-    constructor(name, age) {
-        super(name, age);
-    }
-
-    // Method to log that the student is studying
-    study() {
-        console.log(`${this.name} is studying`);
-    }
-}
-
-// Teacher Class - Inherits from Person and adds teach method
-class Teacher extends Person {
-    constructor(name, age) {
-        super(name, age);
-    }
-
-    // Method to log that the teacher is teaching
-    teach() {
-        console.log(`${this.name} is teaching`);
-    }
-}</code></pre>
+            <pre><code>See script section below for full implementation.</code></pre>
         </div>
 
         <div class="code-section">
@@ -167,59 +110,58 @@ class Teacher extends Person {
     </div>
 
     <script>
-        // Person Class - Base class with name and age attributes
+        // ✅ Person class
         class Person {
             constructor(name, age) {
                 this._name = name;
                 this._age = age;
             }
 
-            // Getter for name
             get name() {
                 return this._name;
             }
 
-            // Setter for name
             set name(name) {
                 this._name = name;
             }
 
-            // Getter for age
             get age() {
                 return this._age;
             }
 
-            // Setter for age
             set age(age) {
                 this._age = age;
             }
         }
 
-        // Student Class - Inherits from Person and adds study method
+        // ✅ Student class
         class Student extends Person {
             constructor(name, age) {
                 super(name, age);
             }
 
-            // Method to log that the student is studying
             study() {
                 console.log(`${this.name} is studying`);
             }
         }
 
-        // Teacher Class - Inherits from Person and adds teach method
+        // ✅ Teacher class
         class Teacher extends Person {
             constructor(name, age) {
                 super(name, age);
             }
 
-            // Method to log that the teacher is teaching
             teach() {
                 console.log(`${this.name} is teaching`);
             }
         }
 
-        // Utility functions
+        // ✅ Attach to window for Cypress access
+        window.Person = Person;
+        window.Student = Student;
+        window.Teacher = Teacher;
+
+        // Test utilities
         function logOutput(message) {
             const output = document.getElementById('output');
             output.textContent += message + '\n';
@@ -230,159 +172,55 @@ class Teacher extends Person {
             document.getElementById('output').textContent = '';
         }
 
-        // Test Case 1: Getting the Name
         function runTestCase1() {
             clearOutput();
-            logOutput('=== Test Case 1: Getting the Name ===');
+            logOutput("=== Test Case 1 ===");
             const person = new Person("John", 25);
-            logOutput(`Created Person with name: "${person.name}"`);
-            logOutput(`Expected: "John"`);
-            logOutput(`Result: ${person.name === "John" ? "✅ PASS" : "❌ FAIL"}`);
+            logOutput(`Expected: John | Got: ${person.name}`);
+            logOutput(person.name === "John" ? "✅ PASS" : "❌ FAIL");
         }
 
-        // Test Case 2: Changing the Age
         function runTestCase2() {
             clearOutput();
-            logOutput('=== Test Case 2: Changing the Age ===');
+            logOutput("=== Test Case 2 ===");
             const person = new Person("John", 25);
-            logOutput(`Initial age: ${person.age}`);
             person.age = 30;
-            logOutput(`After setting age to 30: ${person.age}`);
-            logOutput(`Expected: 30`);
-            logOutput(`Result: ${person.age === 30 ? "✅ PASS" : "❌ FAIL"}`);
+            logOutput(`Expected: 30 | Got: ${person.age}`);
+            logOutput(person.age === 30 ? "✅ PASS" : "❌ FAIL");
         }
 
-        // Test Case 3: Student Studying
         function runTestCase3() {
             clearOutput();
-            logOutput('=== Test Case 3: Student Studying ===');
+            logOutput("=== Test Case 3 ===");
             const student = new Student("John", 30);
-            logOutput('Calling student.study():');
-            
-            // Capture console.log output
             const originalLog = console.log;
-            let capturedOutput = '';
-            console.log = function(message) {
-                capturedOutput = message;
-                originalLog(message);
-            };
-            
+            let captured = '';
+            console.log = msg => { captured = msg; originalLog(msg); };
             student.study();
-            console.log = originalLog; // Restore original console.log
-            
-            logOutput(`Expected: "John is studying"`);
-            logOutput(`Actual: "${capturedOutput}"`);
-            logOutput(`Result: ${capturedOutput === "John is studying" ? "✅ PASS" : "❌ FAIL"}`);
+            console.log = originalLog;
+            logOutput(`Expected: "John is studying" | Got: "${captured}"`);
+            logOutput(captured === "John is studying" ? "✅ PASS" : "❌ FAIL");
         }
 
-        // Test Case 4: Teacher Teaching
         function runTestCase4() {
             clearOutput();
-            logOutput('=== Test Case 4: Teacher Teaching ===');
+            logOutput("=== Test Case 4 ===");
             const teacher = new Teacher("John", 30);
-            logOutput('Calling teacher.teach():');
-            
-            // Capture console.log output
             const originalLog = console.log;
-            let capturedOutput = '';
-            console.log = function(message) {
-                capturedOutput = message;
-                originalLog(message);
-            };
-            
+            let captured = '';
+            console.log = msg => { captured = msg; originalLog(msg); };
             teacher.teach();
-            console.log = originalLog; // Restore original console.log
-            
-            logOutput(`Expected: "John is teaching"`);
-            logOutput(`Actual: "${capturedOutput}"`);
-            logOutput(`Result: ${capturedOutput === "John is teaching" ? "✅ PASS" : "❌ FAIL"}`);
+            console.log = originalLog;
+            logOutput(`Expected: "John is teaching" | Got: "${captured}"`);
+            logOutput(captured === "John is teaching" ? "✅ PASS" : "❌ FAIL");
         }
 
-        // Run all tests
         function runAllTests() {
             clearOutput();
-            logOutput('🧪 Running All Cypress Test Cases...\n');
-            
-            // Test 1
-            logOutput('=== Test Case 1: Getting the Name ===');
-            const person1 = new Person("John", 25);
-            logOutput(`person.name = "${person1.name}"`);
-            logOutput(`Test 1: ${person1.name === "John" ? "✅ PASS" : "❌ FAIL"}\n`);
-            
-            // Test 2
-            logOutput('=== Test Case 2: Changing the Age ===');
-            const person2 = new Person("John", 25);
-            person2.age = 30;
-            logOutput(`person.age after setter = ${person2.age}`);
-            logOutput(`Test 2: ${person2.age === 30 ? "✅ PASS" : "❌ FAIL"}\n`);
-            
-            // Test 3
-            logOutput('=== Test Case 3: Student Studying ===');
-            const student = new Student("John", 30);
-            
-            // Capture console output for student.study()
-            const originalLog = console.log;
-            let studentOutput = '';
-            console.log = function(message) {
-                studentOutput = message;
-                originalLog(message);
-            };
-            
-            student.study();
-            console.log = originalLog;
-            
-            logOutput(`student.study() output: "${studentOutput}"`);
-            logOutput(`Test 3: ${studentOutput === "John is studying" ? "✅ PASS" : "❌ FAIL"}\n`);
-            
-            // Test 4
-            logOutput('=== Test Case 4: Teacher Teaching ===');
-            const teacher = new Teacher("John", 30);
-            
-            // Capture console output for teacher.teach()
-            let teacherOutput = '';
-            console.log = function(message) {
-                teacherOutput = message;
-                originalLog(message);
-            };
-            
-            teacher.teach();
-            console.log = originalLog;
-            
-            logOutput(`teacher.teach() output: "${teacherOutput}"`);
-            logOutput(`Test 4: ${teacherOutput === "John is teaching" ? "✅ PASS" : "❌ FAIL"}\n`);
-            
-            // Summary
-            const allPassed = 
-                person1.name === "John" && 
-                person2.age === 30 && 
-                studentOutput === "John is studying" && 
-                teacherOutput === "John is teaching";
-            
-            logOutput('🎯 TEST SUMMARY:');
-            logOutput(`All tests: ${allPassed ? "✅ ALL PASSED" : "❌ SOME FAILED"}`);
-        }
-
-        // Example usage as provided in requirements
-        function runExampleCode() {
-            clearOutput();
-            logOutput('📖 Running Example Code from Requirements...\n');
-            
-            // Creating a Person instance
-            const person = new Person("John", 25);
-            logOutput(`person.name: ${person.name}`);  // Output: John
-            
-            person.age = 30;  // Using the setter to change the age
-            logOutput(`person.age after setter: ${person.age}`);  // Output: 30
-            
-            // Creating a Student instance
-            const student = new Student("Alice", 22);
-            logOutput('\nCalling student.study():');
-            student.study();  // Output: Alice is studying
-            
-            // Creating a Teacher instance
-            const teacher = new Teacher("Bob", 40);
-            logOutput('\nCalling teacher.teach():');
-            teacher.teach();  // Output: Bob is teaching
+            runTestCase1();
+            runTestCase2();
+            runTestCase3();
+            runTestCase4();
         }
     </script>
 </body>
